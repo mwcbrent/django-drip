@@ -1,6 +1,8 @@
 import sys
 
 from django.db import models
+from django.conf import settings
+from django.utils.module_loading import import_string
 from django.db.models import ForeignKey, OneToOneField, ManyToManyField
 from django.db.models.fields.related import ForeignObjectRel
 
@@ -116,8 +118,8 @@ def get_simple_fields(Model, **kwargs):
 def get_user_model():
     # handle 1.7 and back
     try:
-        from fultonworks.apps.contacts.models import Contact
-        return Contact
+        user_class = import_string(settings.DRIP_CONTACT_CLASS)
+        return user_class
     except ImportError:
         pass
     try:
