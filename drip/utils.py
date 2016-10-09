@@ -116,6 +116,11 @@ def get_simple_fields(Model, **kwargs):
 def get_user_model():
     # handle 1.7 and back
     try:
+        from fultonworks.apps.contacts.models import Contact
+        return Contact
+    except ImportError:
+        pass
+    try:
         from django.contrib.auth import get_user_model as django_get_user_model
         User = django_get_user_model()
     except ImportError:
