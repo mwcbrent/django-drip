@@ -3,6 +3,7 @@ from datetime import datetime, timedelta
 from django.db import models
 from django.core.exceptions import ValidationError
 from django.conf import settings
+from django.utils.module_loading import import_string
 
 from drip.utils import get_user_model
 
@@ -55,7 +56,7 @@ class SentDrip(models.Model):
     date = models.DateTimeField(auto_now_add=True)
 
     drip = models.ForeignKey('drip.Drip', related_name='sent_drips')
-    user = models.ForeignKey(getattr(settings, 'DRIP_CONTACT_CLASS', 'auth.User'), related_name='sent_drips')
+    user = models.ForeignKey(import_string(settings.DRIP_CONTACT_CLASS), related_name='sent_drips')
 
     subject = models.TextField()
     body = models.TextField()
