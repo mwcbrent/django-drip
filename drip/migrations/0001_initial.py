@@ -7,10 +7,6 @@ from django.conf import settings
 
 class Migration(migrations.Migration):
 
-    dependencies = [
-        migrations.swappable_dependency(settings.AUTH_USER_MODEL),
-    ]
-
     operations = [
         migrations.CreateModel(
             name='Drip',
@@ -50,7 +46,7 @@ class Migration(migrations.Migration):
                 ('from_email', models.EmailField(default=None, max_length=254, null=True)),
                 ('from_email_name', models.CharField(default=None, max_length=150, null=True)),
                 ('drip', models.ForeignKey(related_name='sent_drips', to='drip.Drip')),
-                ('user', models.ForeignKey(related_name='sent_drips', to=settings.AUTH_USER_MODEL)),
+                ('user', models.ForeignKey(related_name='sent_drips', to=settings.DRIP_CONTACT_CLASS_SHORT)),
             ],
         ),
     ]
