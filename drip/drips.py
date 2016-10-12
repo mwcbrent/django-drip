@@ -239,6 +239,7 @@ class DripBase(object):
                         from_email=self.from_email,
                         from_email_name=self.from_email_name,
                         subject=message_instance.subject,
+                        message_id=message_instance.message.message_id,
                         body=message_instance.body
                     )
                     count += 1

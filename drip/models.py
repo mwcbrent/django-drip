@@ -57,6 +57,8 @@ class SentDrip(models.Model):
 
     drip = models.ForeignKey('drip.Drip', related_name='sent_drips')
     user = models.ForeignKey(import_string(settings.DRIP_CONTACT_CLASS), related_name='sent_drips')
+    message_id = models.CharField(max_length=64, null=True, blank=True)
+    opened = models.BooleanField(default=False)
 
     subject = models.TextField()
     body = models.TextField()
