@@ -4,7 +4,10 @@ from django.db import models
 from django.conf import settings
 from django.utils.module_loading import import_string
 from django.db.models import ForeignKey, OneToOneField, ManyToManyField
-from django.db.models.fields.related import ForeignObjectRel
+try:
+   from django.db.models.related import RelatedObject as ForeignObjectRel
+except:
+  from django.db.models.fields.related import ForeignObjectRel
 
 # taking a nod from python-requests and skipping six
 _ver = sys.version_info
